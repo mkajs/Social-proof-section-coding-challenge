@@ -1,0 +1,236 @@
+/// Variables
+
+$Very-Dark-Magenta: hsl(300, 43%, 22%);
+$Soft-Pink: hsl(333, 80%, 67%);
+$Dark-Grayish-Magenta: hsl(303, 10%, 53%);
+$Light-Grayish-Magenta: hsl(300, 24%, 96%);
+$White: hsl(0, 0%, 100%);
+
+//////////////////////////////////////////////////////////////
+///Responsive function
+@mixin respond($breakpoint) {
+  @if $breakpoint == desktop {
+    @media only screen and (min-width: 56.25em) {
+      @content;
+    } //900px
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/// Resets
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  transition: all 0.3s;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 50%; // 1rem = 8px, 8px/16px = 50%
+
+  @include respond(desktop) {
+    //  600 < width?
+    font-size: 62.5%; //1 rem = 10px, 10/16 = 62.5%
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+/// Typography
+
+@font-face {
+  font-family: "iran-sans";
+  src: url("/src/fonts/IRANSansWeb.ttf");
+}
+@font-face {
+  font-family: "IRANSansWeb(FaNum)";
+  src: url("/src/fonts/IRANSansWeb\(FaNum\).ttf");
+}
+
+body {
+  font-family: "iran-sans", sans-serif;
+  color: $Dark-Grayish-Magenta;
+
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 400;
+  position: relative;
+}
+
+//////////main styles
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 111rem;
+  margin: 0 auto;
+}
+.fa-num {
+  font-family: "IRANSansWeb(FaNum)";
+}
+
+.content {
+  margin: 12.5rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 4rem;
+  align-items: center;
+  @include respond(desktop) {
+    grid-template-columns: 1fr, 1fr;
+    grid-template-rows: 1fr, 1fr;
+    margin: 10rem 0;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 3rem;
+    @include respond(desktop) {
+      grid-column: 1/2;
+      grid-row: 1/2;
+      max-width: 43rem;
+      text-align: right;
+    }
+
+    h1 {
+      font-size: 4.8rem;
+      font-weight: 900;
+      line-height: 6rem;
+      color: $Very-Dark-Magenta;
+      padding: 0 10rem;
+      @include respond(desktop) {
+        padding: 0;
+      }
+    }
+
+    p {
+      padding: 0 3rem;
+      @include respond(desktop) {
+        padding: 0;
+      }
+    }
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+    @include respond(desktop) {
+      grid-column: 2/-1;
+      grid-row: 1/2;
+      align-self: stretch;
+    }
+
+    .rating-item {
+      align-self: stretch;
+      display: flex;
+      gap: 1.5rem;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: $Light-Grayish-Magenta;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      @include respond(desktop) {
+        flex-direction: row;
+        &:nth-child(1) {
+          transform: translateX(16rem);
+        }
+        &:nth-child(2) {
+          transform: translateX(8rem);
+        }
+      }
+
+      .rating-stars {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        img {
+          width: 2rem;
+        }
+      }
+      p {
+        font-weight: 700;
+        color: $Very-Dark-Magenta;
+      }
+    }
+  }
+  .testimonials {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    color: $White;
+    @include respond(desktop) {
+      grid-row: 2/3;
+      grid-column: 1/3;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .testimonial-card {
+      padding: 4rem 3rem;
+      border-radius: 0.5rem;
+      background-color: $Very-Dark-Magenta;
+      display: grid;
+      grid-template-columns: 4rem 1fr;
+      grid-template-rows: 4.5rem 1fr;
+      justify-content: center;
+      align-items: center;
+      row-gap: 2.7rem;
+      column-gap: 2rem;
+      @include respond(desktop) {
+        &:nth-child(2) {
+          transform: translateY(2rem);
+        }
+        &:nth-child(3) {
+          transform: translateY(4rem);
+        }
+      }
+      img {
+        grid-column: 1/2;
+        width: 4.2rem;
+        border-radius: 100%;
+      }
+      .info {
+        grid-column: 2/-1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        strong {
+          font-weight: 700;
+        }
+
+        p {
+          color: $Soft-Pink;
+        }
+      }
+      .testimonial-paragraph {
+        grid-column: 1/-1;
+        grid-row: 2/-1;
+      }
+    }
+  }
+}
+
+.pattern-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.pattern-bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
